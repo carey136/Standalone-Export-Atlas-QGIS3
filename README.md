@@ -17,15 +17,15 @@ from qgis.core import *
 
 #### These are the only variable that need to be changed ####
 #### The remaining code referenced these definitions     ####
-myProject = 'C:\\Temp\\py\\PYROW_3.qgs'
-layoutName = 'A4_Atlas'
-atlasFilter = '\"parishcode\" = 207'
-exportFormat = 'image'
-imageOutputName = '\"PC_name\" || \' \' || \"NUMBER_\"'
+myProject = 'c:your\\project\\location.qgs'
+layoutName = 'atlas_name'
+atlasFilter = 'filter = query' # Use '' if no filter needed, otherwise e.g. '\"FeatureType\" = \'building\''
+exportFormat = 'image' #'image' or 'pdf'
+imageOutputName = '@atlas_featurenumber' #e.g.\"Parish\" || \' \' || \"Number\" where parish and number are columns
 imageDPI = 200
 imageExtension = '.jpg'
-pdfOutputPath = 'C:\\Temp\\py\\output\\CyclicalSurvey.pdf'
-imageOutputFolder = 'C:\\Temp\\py\\output\\'
+pdfOutputPath = 'c:your\\output\\location.pdf'
+imageOutputFolder = 'c:your\\project\\folder\\'
 
 #### Defining map path and contents ####
 QgsProject.instance().read(myProject)
