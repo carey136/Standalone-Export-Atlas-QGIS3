@@ -1,8 +1,11 @@
 #### importing libraries ####
 import sys
 import os
+from os.path import expanduser
 from qgis.utils import *
 from qgis.core import *
+from PyQt5.QtCore import QFileInfo
+from PyQt5.QtWidgets import QApplication
 
 #### These are the only variable that need to be changed ####
 #### The remaining code referenced these definitions     ####
@@ -10,11 +13,19 @@ myProject = 'c:your\\project\\location.qgs'
 layoutName = 'atlas_name'
 atlasFilter = 'filter = query' # Use '' if no filter needed, otherwise e.g. '\"FeatureType\" = \'building\''
 exportFormat = 'image' #'image' or 'pdf'
-imageOutputName = '@atlas_featurenumber' #e.g.\"Parish\" || \' \' || \"Number\" where parish and number are columns
+imageOutputName = '@atlas_featurenumber' #e.g.\"Parish\" || \' \' || \"Number\" where parish and number are columns - outputs "Newbiggin 207"
 imageDPI = 200
-imageExtension = '.jpg'
+imageExtension = '.jpg' # (or .png)
 pdfOutputPath = 'c:your\\output\\location.pdf'
 imageOutputFolder = 'c:your\\project\\folder\\'
+
+#### Initialising QGIS in back end (utilising users temp folder) ####
+home = expanduser("~")
+QgsApplication( [], False, home + "/AppData/Local/Temp" )
+QgsApplication.setPrefixPath("C:/OSGeo4W64/apps/qgis", True) #Change path for standalone QGIS install
+app = QApplication([])
+QgsApplication.initQgis()
+
 
 #### Defining map path and contents ####
 QgsProject.instance().read(myProject)
