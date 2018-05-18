@@ -1,63 +1,53 @@
 # Standalone-Export-Atlas-QGIS3
-#### This code is to be used as an example to export a QGIS atlas layout (or sections of one) from a QGIS template using a stand-alone python script.
-### Version information/requirements:
-* QGIS 3.0.2
-* QGIS API (python 3.6)
-* Probably OSGeo4W64 (for running outside of QGIS, when this works correctly)
+### This code exports a chosen atlas print layout from a QGS file using a stand-alone python script. The output can either be a multi-page PDF or a set of images.
+## Version information/requirements:
+* Windows 10 64x (untested on Windows 7 or earlier)
+* QGIS 3.0.+ (preferably installed through OSGeo4W*)
+* QGIS API (python 3.6 - usually installed with QGIS/default install through OSGeo4W)
+* A QGIS file fully set up for atlas exports
 
+ *The script makes use of ‪python-qgis.bat from the OSGeo4W bin direcotry (default ‪C:\OSGeo4W64\bin\python-qgis.bat).
 
-#### Currently the script only functions correctly while the QGIS application is open
+## To run the script in commandline:
+
+### 1. Open AtlasExport.py in a syntax highlighting text editor
+### 2. Change the 9 variables as requied ans save the file:
 
 ```python
-#### importing libraries ####
-import sys
-import os
-from qgis.utils import *
-from qgis.core import *
-
-#### These are the only variable that need to be changed ####
-#### The remaining code referenced these definitions     ####
 myProject = 'c:your\\project\\location.qgs'
 layoutName = 'atlas_name'
 atlasFilter = 'filter = query' # Use '' if no filter needed, otherwise e.g. '\"FeatureType\" = \'building\''
 exportFormat = 'image' #'image' or 'pdf'
-imageOutputName = '@atlas_featurenumber' #e.g.\"Parish\" || \' \' || \"Number\" where parish and number are columns
+imageOutputName = 'query producing unique value' #e.g.\"Parish\" || \' \' || \"Number\" where parish and number are columns
 imageDPI = 200
 imageExtension = '.jpg'
 pdfOutputPath = 'c:your\\output\\location.pdf'
 imageOutputFolder = 'c:your\\project\\folder\\'
-
-#### Defining map path and contents ####
-QgsProject.instance().read(myProject)
-myLayout = QgsProject.instance().layoutManager().layoutByName(layoutName)
-myAtlas = myLayout.atlas()
-myAtlasMap = myAtlas.layout()
-
-#### atlas query ####
-myAtlas.setFilterFeatures(True) 
-myAtlas.setFilterExpression(atlasFilter)
-
-#### image output name ####
-myAtlas.setFilenameExpression( imageOutputName )
-
-#### image and pdf settings ####
-pdf_settings=QgsLayoutExporter(myAtlasMap).PdfExportSettings()
-image_settings = QgsLayoutExporter(myAtlasMap).ImageExportSettings()
-image_settings.dpi = imageDPI
-
-#### Export images or PDF (depending on flag) ####
-
-if exportFormat == "image":
-    for myLayout in QgsProject.instance().layoutManager().printLayouts():
-        if myAtlas.enabled():
-            result, error = QgsLayoutExporter.exportToImage(myAtlas, 
-                                baseFilePath=imageOutputFolder, extension=imageExtension, settings=image_settings)
-            if not result == QgsLayoutExporter.Success:
-                print(error)
-if exportFormat == "pdf":
-    for myLayout in QgsProject.instance().layoutManager().printLayouts():
-        if myAtlas.enabled():
-            result, error = QgsLayoutExporter.exportToPdf(myAtlas, pdfOutputPath, settings=pdf_settings)
-            if not result == QgsLayoutExporter.Success:
-                print(error)
 ```
+#### myProject
+The project file path in the following format: ``` 'c:your\\project\\location.qgs' ```
+#### layoutName
+The name of layout set up for atlas exporting
+#### atlasFilter
+* If you require a subset of your coverage layer to be exported (rathet than the entire layer's worth of maps), type in a valid filter while escaping any quotes. e.g.``` '\"FeatureType\" = \'building\'' ```
+* If you do not want to filter the coverage layer, instead use ``` '' ```
+#### exportFormat
+ ```'image' ``` or ``` 'pdf' ``` - 'image' produces multiple image files, 'pdf' produces a multi-page pdf
+#### imageDPI
+The output resolution when using an image output
+#### imageExtension
+The output image type (support many types). Common types include ```'.jpg'``` ```'.png'``` ```'.tif'```
+#### pdfOutputPath
+The output file path in the following format ```'c:your\\output\\location.pdf'```
+#### imageOutputFolder
+The output path in the following format ```'c:your\\project\\folder\\'```
+### 3. open commandline and type the following:
+``` "C:\OSGeo4W64\bin\python-qgis.bat" "c:your\\script\\location\\AtlasExport.py" ```
+* ``` "C:\OSGeo4W64\bin\python-qgis.bat" ``` is the default path for OSGeo4W's batch file. It exectues several other batch files, loading the environment for python 3.6 to run with QGIS libraries
+* ``` "c:your\\script\\location\\AtlasExport.py" ``` Is the location of the python file on your machine
+
+The script will now output the images of PDFs to the location noted in the script. If you encounter any errors, the explicit reason will be displayed in commandlinem allowing you to troubleshoot.
+
+## To run as a batch file
+* Copy the code executed in the commandline in step 3 into a batch file: ``` "C:\OSGeo4W64\bin\python-qgis.bat" "c:your\\script\\location\\AtlasExport.py" ```
+* Double clikc the file to run the script
