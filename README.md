@@ -11,7 +11,7 @@
 ## To run the script in command line:
 
 ### 1. Open AtlasExport.py in a syntax highlighting text editor
-### 2. Change the 9 variables as required and save the file:
+### 2. Change the 8 variables as required and save the file:
 
 ```python
 myProject = "c:your\\project\\location.qgs"
