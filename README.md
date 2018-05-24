@@ -43,7 +43,7 @@ The name of the coverage layer used in the project file. This is derived from th
 #### outputFolder (override with flag ``` -D "directory" ```)
 The output folder in the following format ``` "c:your\project\folder" ```
 #### outputName (override with flag ``` -N "name query" ```)
-The output name for to create names derived from attributes: For example ``` \"Parish\" || \' \' || \"Number\" ``` or simply ``` "@atlas_featurenid ```
+The output name derived from attributes: For example ``` \"Parish\" || \' \' || \"Number\" ``` or simply ``` "@atlas_featurenid ```
 #### pdfName (override with flag ``` -N "name" ```)
 The output pdf name in the following format ``` "name" ```
 ### 3. open command line and type the following:
@@ -60,6 +60,7 @@ C:\OSGeo4W64\bin\python-qgis.bat C:\Temp\py\pyrow2.py -F "parishcode" "=" "207" 
 * Flag -O changes the output to images (from the default multi-page pdf)
 * Flag -D overrides the output location to the desktop
 
+#### For use while in commandline, use --help fpr more info
 
 ## To run as a batch file
 * Copy the code executed in the commandline in step 3 into a batch file: ``` "C:\OSGeo4W64\bin\python-qgis.bat" "c:your\\script\\location\\AtlasExport.py" ```
