@@ -6,6 +6,24 @@ from qgis.utils import *
 from qgis.core import *
 from PyQt5.QtCore import QFileInfo
 from PyQt5.QtWidgets import QApplication
+import argparse
+
+parser = argparse.ArgumentParser()
+parser.add_argument('-P',
+    metavar=('\"Project file\"'), help='Usage: Override QGS project file')
+parser.add_argument('-F',nargs=3,
+    metavar=('\"Column\"','\"operator\"','\"value\"'),help='Usage: Override Atlas filter')
+parser.add_argument('-C',
+    metavar=('\"Coverage Layer Name\"'), help='Usage: Override atlas coverage layer')
+parser.add_argument('-O',
+    metavar=('\"Output Format\"'),help='Usage: Either "image" or "pdf" (default)')
+parser.add_argument('-D',
+    metavar=('\"Output Directory\"'), help='Usage: Override output directory (exclude trailing "\\"')
+parser.add_argument('-N',
+    metavar=('\"Output Name\"'),help='Usage: Override image output name using unique value query. e.g. \"@atlas_featurenid\"')
+parser.add_argument('-Q',
+    metavar=('\"Output pdf Name\"'), help='Usage: Override output name for PDFs (cannot parse column values as image filter can')
+parser.parse_args()
 
 ####      Hardcode variables here      ####
 #### Or use flags to override defaults ####
