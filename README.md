@@ -45,7 +45,7 @@ The output folder in the following format ``` "c:your\project\folder" ```
 #### outputName (override with flag ``` -N "name query" ```)
 The output name for to create names derived from attributes: For example ``` \"Parish\" || \' \' || \"Number\" ``` or simply ``` "@atlas_featurenid ```
 #### pdfName (override with flag ``` -N "name" ```)
-The output file path in the following format ``` "name" ```
+The output pdf name in the following format ``` "name" ```
 ### 3. open command line and type the following:
 ``` "C:\OSGeo4W64\bin\python-qgis.bat" "c:your\\script\\location\\AtlasExport.py" ```
 * ``` "C:\OSGeo4W64\bin\python-qgis.bat" ``` is the default path for OSGeo4W's batch file. It executes several other batch files, loading the environment for python 3.6 to run with QGIS libraries
