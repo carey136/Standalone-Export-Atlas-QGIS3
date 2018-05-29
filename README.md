@@ -23,8 +23,11 @@ outputFolder = "c:your\project\folder"
 outputName = "query producing unique value"
 pdfName = "Export"
 ```
+### Note: ```\``` is an escape character in python:
+#### * When quoting file paths, use double backslashes: ```c:your\\path\\here```
+#### * When using ```"``` or ```'``` as part of a query/filter, escape these characters with a backslash: ```'\"FeatureType\" = \'building\''```
 #### myProject (override with flag ``` -P "project path" ```)
-The project file path in the following format: For example ``` "c:your\project\location.qgs" ```
+The project file path in the following format: For example ``` "c:your\\project\\location.qgs" ```
 #### layoutName (override with flag ``` -L "atlas_name" ```)
 The name of layout set up for atlas exporting: For example ``` "Atlas_A4" ```
 #### coverageLayer (override with flag ``` -C "layer_name" ```)
@@ -41,21 +44,21 @@ The name of the coverage layer used in the project file. This is derived from th
 #### outputFormat (override with flag ``` -O "Format" ```)
  ```"image" ``` or ``` "pdf" ``` - "image" produces multiple image files, "pdf" produces a multi-page pdf
 #### outputFolder (override with flag ``` -D "directory" ```)
-The output folder in the following format ``` "c:your\project\folder" ```
+The output folder in the following format ``` "c:your\\project\\folder" ```
 #### outputName (override with flag ``` -N "name query" ```)
 The output name derived from attributes: For example ``` \"Parish\" || \' \' || \"Number\" ``` or simply ``` "@atlas_featurenid ```
 #### pdfName (override with flag ``` -N "name" ```)
 The output pdf name in the following format ``` "name" ```
 ### 3. open command line and type the following:
-``` "C:\OSGeo4W64\bin\python-qgis.bat" "c:your\\script\\location\\AtlasExport.py" ```
+``` "C:\OSGeo4W64\bin\python-qgis.bat" "c:your\script\location\AtlasExport.py" ```
 * ``` "C:\OSGeo4W64\bin\python-qgis.bat" ``` is the default path for OSGeo4W's batch file. It executes several other batch files, loading the environment for python 3.6 to run with QGIS libraries
-* ``` "c:your\\script\\location\\AtlasExport.py" ``` Is the location of the python file on your machine
+* ``` "c:your\script\location\AtlasExport.py" ``` Is the location of the python file on your machine
 
 The script will now output the images of PDFs to the location noted in the script. If you encounter any errors, the explicit reason will be displayed in command line allowing you to troubleshoot.
 
 ## Flags / Overrides examples
 These can be used to change many input and output parameters without modifying the code. Below is an exmaples in action:
-C:\OSGeo4W64\bin\python-qgis.bat C:\Temp\py\pyrow2.py -F "parishcode" "=" "207" -O image -D "C:\Users\Guy\Desktop"
+C:\OSGeo4W64\bin\python-qgis.bat C:\Temp\py\pyrow2.py -F "parishcode" "=" "207" -O image -D "C:\\Users\\Guy\\Desktop"
 * Flag -F changes the atlas query (dataset contains 3000 features, filtered set contains 7)
 * Flag -O changes the output to images (from the default multi-page pdf)
 * Flag -D overrides the output location to the desktop
@@ -63,6 +66,6 @@ C:\OSGeo4W64\bin\python-qgis.bat C:\Temp\py\pyrow2.py -F "parishcode" "=" "207" 
 #### For use while in commandline, use --help fpr more info
 
 ## To run as a batch file
-* Copy the code executed in the commandline in step 3 into a batch file: ``` "C:\OSGeo4W64\bin\python-qgis.bat" "c:your\\script\\location\\AtlasExport.py" ```
+* Copy the code executed in the commandline in step 3 into a batch file: ``` "C:\OSGeo4W64\bin\python-qgis.bat" "c:your\script\location\AtlasExport.py" ```
 * Add any extra flags as needed
 * Double click the file to run the script
